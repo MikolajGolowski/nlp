@@ -4,12 +4,9 @@ import xml.etree.ElementTree as et
 
 
 def get_words(file):
-    t = et.parse(file)
-    root = t.getroot()
-    return root.findall('.//{http://www.tei-c.org/ns/1.0}w')
+    return et.parse(file).getroot().findall('.//{http://www.tei-c.org/ns/1.0}w')
 
-
-def zipf_analysis(words):
+def zipf(words):
     freq = Counter(words)
     ranks = range(1, len(freq) + 1)
     frequencies = sorted(freq.values(), reverse=True)
@@ -17,8 +14,6 @@ def zipf_analysis(words):
     plt.xlabel('Rank')
     plt.ylabel('Frequency')
 
-
-# Funkcja do analizy prawa Heapsa-Herdana
 def heaps_analysis(words):
     unique_words = set()
     vocab_size = []
